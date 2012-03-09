@@ -8,6 +8,11 @@ module SpreeActiveShippingExtension
     end
 
     def self.activate
+      # make sure active shipping base is loaded first
+      Dir.glob(File.join(File.dirname(__FILE__), "../../app/models/spree/calculator/active_shipping/base.rb")) do |c|
+        Rails.env.production? ? require(c) : load(c)
+      end
+      
       Dir.glob(File.join(File.dirname(__FILE__), "../../app/models/spree/calculator/**/base.rb")) do |c|
         Rails.env.production? ? require(c) : load(c)
       end
