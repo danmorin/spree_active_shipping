@@ -1,5 +1,5 @@
 module Spree
-  class Calculator::Ups::Base < Calculator::ActiveShipping::Base
+  class Calculator::Ups::Base < ::Spree::Calculator::ActiveShipping::Base
     def carrier
       if Spree::ActiveShipping::Config[:shipper_number].nil?
         ActiveMerchant::Shipping::UPS.new(:login => Spree::ActiveShipping::Config[:ups_login],
