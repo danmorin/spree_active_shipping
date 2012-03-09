@@ -9,11 +9,11 @@ module SpreeActiveShippingExtension
 
     def self.activate
       # make sure active shipping base is loaded first
-      Dir.glob(File.join(File.dirname(__FILE__), "../../app/models/spree/calculator/active_shipping/base.rb")) do |c|
+      Dir.glob(File.join(File.dirname(__FILE__), "../../app/models/spree/calculators/active_shipping/base.rb")) do |c|
         Rails.env.production? ? require(c) : load(c)
       end
       
-      Dir.glob(File.join(File.dirname(__FILE__), "../../app/models/spree/calculator/**/base.rb")) do |c|
+      Dir.glob(File.join(File.dirname(__FILE__), "../../app/models/spree/calculators/**/base.rb")) do |c|
         Rails.env.production? ? require(c) : load(c)
       end
 
@@ -31,9 +31,9 @@ module SpreeActiveShippingExtension
       end
 
       app.config.spree.calculators.shipping_methods.concat(
-        Spree::Calculator::Fedex::Base.descendants +
-        Spree::Calculator::Ups::Base.descendants +
-        Spree::Calculator::Usps::Base.descendants
+        Spree::Calculators::Fedex::Base.descendants +
+        Spree::Calculators::Ups::Base.descendants +
+        Spree::Calculators::Usps::Base.descendants
       )
     end
   end
